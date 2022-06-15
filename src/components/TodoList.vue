@@ -41,9 +41,13 @@
 
             <label for="newitem">Add to the todo list</label>
             <input type="text" name="newitem" id="newitem" v-model="itemTitle">
-            <button type="submit">Add item</button>
-
+            <button type="submit">ADD</button>
+            <button class="btn-detete" type="button"
+                     aria-label="Delete" title="Delete" @click="deleteAll(index)">
+                            <i aria-hidden="true" class="material-icons">Clear</i>
+            </button>
         </form>
+        
 
     </main>
     <!----------------------------END MAIN -------------------------->
@@ -52,23 +56,28 @@
 <script>
 
     const localKey = 'todos';
+
     export default {
+
         name: 'TodoList',
   props: {
     msg: String
   },
-        data() {
+      
+      data() {
             return {
                 itemTitle: '',
                 items: [],
             }
         },
+
         methods: {
               tomorrow() {
                   const d = new Date()
                   d.setDate(d.getDate() )
                    return d 
   },
+
             addItem() {
                 if (!this.itemTitle) {
                     return;
@@ -81,18 +90,25 @@
 
                 this.itemTitle = '';
             },
+
             deleteItem(index) {
                 this.items.splice(index, 1);
             },
+              deleteAll(index) {
+                this.items.splice(index);
+            },
+
             changeItemStatus(index) {
                 const item = this.items[index];
                 this.items[index].done = !item.done;
             }
         },
+
         mounted() {
             const items = localStorage.getItem(localKey) || '[]';
             this.items = JSON.parse(items);
         },
+
         watch: {
             items: {
                 deep: true,
@@ -115,16 +131,20 @@
         box-sizing: border-box;
     }
 
-    html, body {
-        background: var(--light-gray);
-        font-size: 1.1rem;
+     html{
+         font-size: 1.1rem;
+     }
+
+     body {
+        background-image: linear-gradient(62deg, rgba(1, 95, 183, 0.9732216701223994) 13%, rgba(255, 122, 151, 0.5) 4%),linear-gradient(44deg, rgba(0, 43, 99, 0.07922090238615942) 39%, rgba(242, 140, 143, 0.5) 18%),linear-gradient(118deg, rgba(84, 202, 242, 0.03152997265339608) 40%, rgba(247, 155, 187, 0.5) 54%),linear-gradient(58deg, rgba(90, 90, 237, 0.16144443572260592) 83%, rgba(249, 156, 142, 0.5) 23%); background-blend-mode: normal,lighten,multiply,hard-light;
         font-family: 'Quicksand', sans-serif;
-        height: 100%;
+        height: 100vh;
+        
     }
 
 :root{
     --light-gray:#f7f1f1;
-    --pink: #FF6666;
+    --pink:  #10101d;
     --light-pink:#FF5E5E;
     --white:#fff;
     --light-black:rgba(100, 100, 100, .1);
@@ -148,7 +168,8 @@
         max-width: 500px;
         background: var(--pink);
         color:var(--white);
-        box-shadow: -20px -20px 0px 0px var(--light-black);
+        border-radius: 10px;
+         border: 2px solid #fff;
     }
 
     #todolist h1 {
@@ -243,7 +264,9 @@
     }
 
     form input {
+        
         flex-grow: 1;
+         width: 50%;
         border: none;
         background: var(--light-gray);
         padding: 0 1.5em;
@@ -272,6 +295,6 @@
         margin-top: 1rem;
         height: 2.5rem;
     }
-
+    
     /* ================ END MAIN ================*/
 </style>
