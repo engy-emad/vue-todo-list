@@ -1,4 +1,5 @@
 <template>
+
 <!---------------------------- START MAIN -------------------------->
 
 <!---------------------------- START TODOLIST ---------------------->
@@ -40,17 +41,22 @@
         <form @submit.prevent="addItem">
 
             <label for="newitem">Add to the todo list</label>
+
             <input type="text" name="newitem" id="newitem" v-model="itemTitle">
+
             <button type="submit">ADD</button>
+
             <button class="btn-detete" type="button"
-                     aria-label="Delete" title="Delete" @click="deleteAll(index)">
-                            <i aria-hidden="true" class="material-icons">Clear</i>
+                    aria-label="Delete" title="Delete" @click="deleteAll(index)">
+                     <i aria-hidden="true" class="material-icons">Clear</i>
             </button>
+
         </form>
         
-
     </main>
+
     <!----------------------------END MAIN -------------------------->
+
 </template>
 
 <script>
@@ -60,8 +66,8 @@
     export default {
 
         name: 'TodoList',
-  props: {
-    msg: String
+        props: {
+        msg: String
   },
       
       data() {
@@ -72,6 +78,7 @@
         },
 
         methods: {
+
               tomorrow() {
                   const d = new Date()
                   d.setDate(d.getDate() )
@@ -79,6 +86,7 @@
   },
 
             addItem() {
+
                 if (!this.itemTitle) {
                     return;
                 }
@@ -92,8 +100,10 @@
             },
 
             deleteItem(index) {
+
                 this.items.splice(index, 1);
             },
+
               deleteAll(index) {
                 this.items.splice(index);
             },
@@ -105,11 +115,13 @@
         },
 
         mounted() {
+
             const items = localStorage.getItem(localKey) || '[]';
             this.items = JSON.parse(items);
         },
 
         watch: {
+
             items: {
                 deep: true,
                 handler(items) {
@@ -119,15 +131,18 @@
             }
         }
     }
+
 </script>
 
 <style>
 
 /* ================ STYLE GLOBAL ================*/
+
     * {
         margin: 0;
         padding: 0;
         outline: none;
+         list-style: none;
         box-sizing: border-box;
     }
 
@@ -142,12 +157,13 @@
         
     }
 
-:root{
-    --light-gray:#f7f1f1;
-    --pink:  #10101d;
+    :root{
+    
+    --block:  #10101d;
     --light-pink:#FF5E5E;
+    --light-gray:#f4f1f1;
     --white:#fff;
-    --light-black:rgba(100, 100, 100, .1);
+    --light-pink:rgba(100, 100, 100, .1);
 }
 
 /* ================ END GLOBAL ================*/
@@ -166,17 +182,17 @@
         margin: 4rem auto;
         padding: 2rem 3rem 3rem;
         max-width: 500px;
-        background: var(--pink);
+        background: var(--block);
         color:var(--white);
         border-radius: 10px;
-         border: 2px solid #fff;
+         border: 2px solid var(--white);
     }
 
     #todolist h1 {
         font-weight: normal;
         font-size: 2.6rem;
         letter-spacing: 0.05em;
-        border-bottom: 1px solid var(--light-black);
+        border-bottom: 1px solid var(--light-pink);
     }
 
     #todolist h1 span {
@@ -198,7 +214,7 @@
 
     #todolist ul {
         margin-top: 2.6rem;
-        list-style: none;
+       
     }
 
     #todolist .todolist-move {
@@ -255,28 +271,29 @@
         margin-top: 3rem;
         display: flex;
         flex-wrap: wrap;
+         color: var(--white);
     }
 
     form label {
         min-width: 100%;
         margin-bottom: .5rem;
         font-size: 1.3rem;
+       
     }
 
     form input {
-        
         flex-grow: 1;
-         width: 50%;
-        border: none;
-        background: var(--light-gray);
+        width: 50%;
+        border: 1px solid rgba(255, 255, 255, .3);
+        background: rgba(255, 255, 255, 0.1);
         padding: 0 1.5em;
         font-size: initial;
+         color: var(--white);
     }
 
     form button {
         padding: 0 1.3rem;
-        border: none;
-        background:var(--pink);
+        background:var(--block);
         color: white;
         text-transform: uppercase;
         font-weight: bold;
@@ -287,7 +304,7 @@
     }
 
     form button:hover {
-        background:var(--light-pink);
+        background:var(--light-block);
     }
 
     form input,
