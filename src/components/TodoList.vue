@@ -1,12 +1,18 @@
 <template>
+<!---------------------------- START MAIN -------------------------->
+
+<!---------------------------- START TODOLIST ---------------------->
+
     <main id="todolist">
 
-        <h1>Todo List <span>Get things done, one item at a time.</span></h1>
+        <h1>Todo List  <span>{{ tomorrow()}}</span></h1>
+
         <div class="items" v-if="items.length">
 
             <ul>
 
                 <li v-for="(item, index) in items" :key="index" :class="{'done' : item.done}">
+                
                     <span class="label">{{item.title}}</span>
 
                     <div class="actions">
@@ -24,22 +30,27 @@
                     </div>
 
                 </li>
+
             </ul>
+
         </div>
 
         <p class="emptylist" v-else>Your todo list is empty.</p>
 
         <form @submit.prevent="addItem">
+
             <label for="newitem">Add to the todo list</label>
             <input type="text" name="newitem" id="newitem" v-model="itemTitle">
             <button type="submit">Add item</button>
+
         </form>
 
     </main>
-    
+    <!----------------------------END MAIN -------------------------->
 </template>
 
 <script>
+
     const localKey = 'todos';
     export default {
         name: 'TodoList',
@@ -53,6 +64,11 @@
             }
         },
         methods: {
+              tomorrow() {
+                  const d = new Date()
+                  d.setDate(d.getDate() )
+                   return d 
+  },
             addItem() {
                 if (!this.itemTitle) {
                     return;
@@ -100,13 +116,14 @@
     }
 
     html, body {
-        background: #f7f1f1;
+        background: var(--light-gray);
         font-size: 1.1rem;
         font-family: 'Quicksand', sans-serif;
         height: 100%;
     }
 
 :root{
+    --light-gray:#f7f1f1;
     --pink: #FF6666;
     --light-pink:#FF5E5E;
     --white:#fff;
@@ -123,7 +140,6 @@
         }
     }
 
-
 /* ================ STYLE TODOLIST ================*/
 
     #todolist {
@@ -136,7 +152,6 @@
     }
 
     #todolist h1 {
-        /*text-align:center;*/
         font-weight: normal;
         font-size: 2.6rem;
         letter-spacing: 0.05em;
@@ -146,9 +161,9 @@
     #todolist h1 span {
         display: block;
         font-size: 0.8rem;
-        margin-bottom: 0.7rem;
+        line-height: 2;
         margin-left: 3px;
-        margin-top: 0.2rem;
+        margin-block: 0.2rem 0.8rem;
     }
 
     #todolist .emptylist {
@@ -230,7 +245,7 @@
     form input {
         flex-grow: 1;
         border: none;
-        background: #f7f1f1;
+        background: var(--light-gray);
         padding: 0 1.5em;
         font-size: initial;
     }
@@ -254,8 +269,8 @@
 
     form input,
     form button {
-        font-family: 'Quicksand', sans-serif;
-        height: 3rem;
+        margin-top: 1rem;
+        height: 2.5rem;
     }
 
     /* ================ END MAIN ================*/
