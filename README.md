@@ -27,5 +27,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 .
 
+### Introduction
+The project uses  `vue.js` .
+
+
+## What do we have here?
+```
+It's a simple static To-Do web app with 3 different visual tools (Vuetify, Vue Material, )
+In order to see each one of them just git-checkout to the specific branch.
+
+```
 
 
