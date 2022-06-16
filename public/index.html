@@ -18,6 +18,71 @@
 </head>
 
 <body>
+
+    <template>
+
+        <!---------------------------- START MAIN -------------------------->
+        
+        <!---------------------------- START TODOLIST ---------------------->
+        
+            <main id="todolist">
+        
+                <h1>Todo List  <span>{{ tomorrow()}}</span></h1>
+        
+                <div class="items" v-if="items.length">
+        
+                    <ul>
+        
+                        <li v-for="(item, index) in items" :key="index" :class="{'done' : item.done}">
+                        
+                            <span class="label">{{item.title}}</span>
+        
+                            <div class="actions">
+        
+                                <button class="btn-picto" type="button" @click="changeItemStatus(index)">
+                                    <i aria-hidden="true" class="material-icons">{{item.done ? 'check_box' :
+                                        'check_box_outline_blank'}}</i>
+                                </button>
+        
+                                <button class="btn-picto" type="button"
+                                        aria-label="Delete" title="Delete" @click="deleteItem(index)">
+                                    <i aria-hidden="true" class="material-icons">delete</i>
+                                </button>
+        
+                            </div>
+        
+                        </li>
+        
+                    </ul>
+        
+                </div>
+        
+                <p class="emptylist" v-else>Your todo list is empty.</p>
+        
+                <form @submit.prevent="addItem">
+        
+                    <label for="newitem">Add to the todo list</label>
+        
+                    <input type="text" name="newitem" id="newitem" v-model="itemTitle">
+        
+                    <button type="submit">ADD</button>
+        
+                    <button class="btn-detete" type="button"
+                            aria-label="Delete" title="Delete" @click="deleteAll(index)">
+                             <i aria-hidden="true" class="material-icons">Clear</i>
+                    </button>
+        
+                </form>
+                
+                 <!----------------------------END FORM -------------------------->
+        
+            </main>
+        
+            <!----------------------------END MAIN -------------------------->
+        
+        </template>
+
+
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
